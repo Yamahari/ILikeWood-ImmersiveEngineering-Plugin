@@ -1,0 +1,6 @@
+{
+  "parent": "ilikewood:item/treated_wood_crossbow",
+  "textures": {
+    "layer0": "ilikewood:item/crossbow/firework/treated_wood"
+  }
+}

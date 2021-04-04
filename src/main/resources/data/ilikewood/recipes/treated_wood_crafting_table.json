@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "crafting_tables",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "ilikewood:treated_wood_panels"
+    }
+  },
+  "result": {
+    "item": "ilikewood:treated_wood_crafting_table"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ilikewood:iron_treated_wood_hoe",
+    "ilikewood:treated_wood_hoe",
+    "ilikewood:golden_treated_wood_hoe",
+    "ilikewood:netherite_treated_wood_hoe",
+    "ilikewood:diamond_treated_wood_hoe",
+    "ilikewood:stone_treated_wood_hoe"
+  ]
+}

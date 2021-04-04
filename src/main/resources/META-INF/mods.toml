@@ -1,0 +1,37 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "[36.1.0,)" #mandatory
+license = "MIT"
+issueTrackerURL = "https://github.com/Yamahari/ILikeWood-BiomesOPlenty-Plugin/issues" #optional
+
+[[mods]] #mandatory
+modId = "ilikewoodximmersiveengineering" #mandatory
+version = "1.16.5-6.2.2.0" #mandatory
+displayName = "I Like Wood - Immersive Engineering Plugin" #mandatory
+displayURL = "http://example.com/" #optional
+logoFile = "logo.png" #optional
+credits = "Yamahari and the people of Forge" #optional
+authors = "Yamahari" #optional
+description = '''
+Adds Immersive Engineering support for I Like Wood.
+'''
+
+[[dependencies.ilikewoodxbiomesoplenty]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "[36.1.0,)" #mandatory
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ilikewoodxbiomesoplenty]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.5,1.17)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ilikewoodxbiomesoplenty]]
+modId = "ilikewood"
+mandatory = true
+versionRange = "[1.16.5-6.2.2.0,)"
+ordering = "NONE"
+side = "BOTH"

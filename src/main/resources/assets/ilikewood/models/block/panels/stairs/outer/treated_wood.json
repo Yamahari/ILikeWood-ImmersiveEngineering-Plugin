@@ -1,0 +1,6 @@
+{
+  "parent": "ilikewood:block/panels/stairs/outer/template",
+  "textures": {
+    "planks": "immersiveengineering:block/wooden_decoration/treated_wood_horizontal"
+  }
+}

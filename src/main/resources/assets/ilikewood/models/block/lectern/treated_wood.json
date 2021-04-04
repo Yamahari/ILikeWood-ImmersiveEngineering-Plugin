@@ -1,0 +1,10 @@
+{
+  "parent": "ilikewood:block/lectern/template",
+  "textures": {
+    "top": "ilikewood:block/lectern/top/treated_wood",
+    "sides": "ilikewood:block/lectern/sides/treated_wood",
+    "bottom": "immersiveengineering:block/wooden_decoration/treated_wood_horizontal",
+    "base": "ilikewood:block/lectern/base/treated_wood",
+    "front": "ilikewood:block/lectern/front/treated_wood"
+  }
+}

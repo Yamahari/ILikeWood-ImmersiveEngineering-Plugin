@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "ilikewood:block/panels/slab/top/treated_wood"
+    },
+    "type=bottom": {
+      "model": "ilikewood:block/panels/slab/treated_wood"
+    },
+    "type=double": {
+      "model": "ilikewood:block/panels/treated_wood"
+    }
+  }
+}

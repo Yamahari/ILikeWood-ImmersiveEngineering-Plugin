@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "ilikewood:block/bookshelf/treated_wood",
+    "end": "immersiveengineering:block/wooden_decoration/treated_wood_horizontal"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "ilikewood:block/bed/foot/template",
+  "textures": {
+    "planks": "immersiveengineering:block/wooden_decoration/treated_wood_horizontal",
+    "frame": "ilikewood:block/bed/frame/treated_wood",
+    "top": "ilikewood:block/bed/sheets/foot/top/light_blue",
+    "sides": "ilikewood:block/bed/sheets/foot/sides/light_blue"
+  }
+}

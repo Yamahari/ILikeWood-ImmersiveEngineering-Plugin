@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "beds",
+  "pattern": [
+    "###",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:purple_wool"
+    },
+    "X": {
+      "item": "ilikewood:treated_wood_panels"
+    }
+  },
+  "result": {
+    "item": "ilikewood:purple_treated_wood_bed"
+  }
+}

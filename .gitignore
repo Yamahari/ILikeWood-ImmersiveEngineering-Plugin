@@ -1,0 +1,30 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+/src/generated/
+/logs/
+/src/main/resources/assets/biomesoplenty/
+/src/main/resources/.cache/
+/src/main/resources/assets/immersiveengineering/
