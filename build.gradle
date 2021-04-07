@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-6.2.2.0'
+version = '1.16.5-6.2.3.0'
 group = 'yamahari.ilikewoodximmersiveengineering' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ilikewoodximmersiveengineering'
 
@@ -48,9 +48,9 @@ configurations {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 
-    compileOnly fg.deobf('build.libs:ilikewood:1.16.5-6.2.2.0:api')
+    compileOnly fg.deobf('build.libs:ilikewood:1.16.5-6.2.3.0:api')
 
-    ilikewood fg.deobf('build.libs:ilikewood:1.16.5-6.2.2.0')
+    ilikewood fg.deobf('build.libs:ilikewood:1.16.5-6.2.3.0')
     runtimeOnly fg.deobf('build.libs:ImmersiveEngineering:1.16.5-4.2.4-134')
 }
 
@@ -116,7 +116,7 @@ jar {
         attributes([
                 "Specification-Title": "ilikewoodximmersiveengineering",
                 "Specification-Vendor": "yamahari",
-                "Specification-Version": "1.16.5-6.2.2.0",
+                "Specification-Version": "${version}",
                 "Implementation-Title": "ilikewoodximmersiveengineering",
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"yamahari",
