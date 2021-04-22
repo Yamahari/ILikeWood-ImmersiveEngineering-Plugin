@@ -1,70 +1,60 @@
 package yamahari.ilikewood.plugin.immersiveengineering.util;
 
+import yamahari.ilikewood.registry.objecttype.WoodenBlockType;
+import yamahari.ilikewood.registry.objecttype.WoodenItemType;
+import yamahari.ilikewood.registry.objecttype.WoodenTieredItemType;
+import yamahari.ilikewood.registry.woodtype.DefaultWoodType;
 import yamahari.ilikewood.registry.woodtype.IWoodType;
-import yamahari.ilikewood.util.objecttype.WoodenObjectType;
-import yamahari.ilikewood.util.objecttype.WoodenObjectTypes;
-import yamahari.ilikewood.util.objecttype.tiered.WoodenTieredObjectType;
-import yamahari.ilikewood.util.objecttype.tiered.WoodenTieredObjectTypes;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class WoodType implements IWoodType {
-    private static final Set<WoodenObjectType> OBJECT_TYPES = Collections.unmodifiableSet(WoodenObjectTypes
-        .get()
-        .filter(objectType -> !objectType.requiresLog() && !objectType.requiresStrippedLog())
-        .collect(Collectors.toSet()));
-
-    private static final Set<WoodenTieredObjectType> TIERED_OBJECT_TYPES =
-        Collections.unmodifiableSet(WoodenTieredObjectTypes.get().collect(Collectors.toSet()));
-
+    private static final Set<WoodenBlockType> BLOCK_TYPES = createBlockTypesSet();
     private final String name;
-    private final Map<WoodenObjectType, Properties> properties;
 
     public WoodType(final String name) {
         this.name = name;
 
-        final Map<WoodenObjectType, Properties> properties = new HashMap<>();
+    }
 
-        Stream
-            .of(WoodenObjectTypes.BARREL,
-                WoodenObjectTypes.CHEST,
-                WoodenObjectTypes.LECTERN,
-                WoodenObjectTypes.PANELS,
-                WoodenObjectTypes.BOOKSHELF,
-                WoodenObjectTypes.COMPOSTER,
-                WoodenObjectTypes.WALL,
-                WoodenObjectTypes.LADDER,
-                WoodenObjectTypes.POST,
-                WoodenObjectTypes.STRIPPED_POST,
-                WoodenObjectTypes.CRAFTING_TABLE,
-                WoodenObjectTypes.STAIRS,
-                WoodenObjectTypes.BOW,
-                WoodenObjectTypes.CROSSBOW,
-                WoodenObjectTypes.SAWMILL,
-                WoodenObjectTypes.FISHING_ROD)
-            .forEach(woodenObjectType -> properties.put(woodenObjectType, new Properties(300)));
+    private static Set<WoodenBlockType> createBlockTypesSet() {
+        final Set<WoodenBlockType> blockTypes = new HashSet<>();
 
-        Stream
-            .of(WoodenObjectTypes.STICK, WoodenObjectTypes.SCAFFOLDING)
-            .forEach(woodenObjectType -> properties.put(woodenObjectType, new Properties(100)));
+        blockTypes.add(WoodenBlockType.PANELS);
+        blockTypes.add(WoodenBlockType.PANELS_STAIRS);
+        blockTypes.add(WoodenBlockType.PANELS_SLAB);
+        blockTypes.add(WoodenBlockType.BARREL);
+        blockTypes.add(WoodenBlockType.WHITE_BED);
+        blockTypes.add(WoodenBlockType.ORANGE_BED);
+        blockTypes.add(WoodenBlockType.MAGENTA_BED);
+        blockTypes.add(WoodenBlockType.LIGHT_BLUE_BED);
+        blockTypes.add(WoodenBlockType.YELLOW_BED);
+        blockTypes.add(WoodenBlockType.LIME_BED);
+        blockTypes.add(WoodenBlockType.PINK_BED);
+        blockTypes.add(WoodenBlockType.GRAY_BED);
+        blockTypes.add(WoodenBlockType.LIGHT_GRAY_BED);
+        blockTypes.add(WoodenBlockType.CYAN_BED);
+        blockTypes.add(WoodenBlockType.PURPLE_BED);
+        blockTypes.add(WoodenBlockType.BLUE_BED);
+        blockTypes.add(WoodenBlockType.BROWN_BED);
+        blockTypes.add(WoodenBlockType.GREEN_BED);
+        blockTypes.add(WoodenBlockType.RED_BED);
+        blockTypes.add(WoodenBlockType.BLACK_BED);
+        blockTypes.add(WoodenBlockType.BOOKSHELF);
+        blockTypes.add(WoodenBlockType.COMPOSTER);
+        blockTypes.add(WoodenBlockType.CRAFTING_TABLE);
+        blockTypes.add(WoodenBlockType.CHEST);
+        blockTypes.add(WoodenBlockType.LECTERN);
+        blockTypes.add(WoodenBlockType.LADDER);
+        blockTypes.add(WoodenBlockType.SCAFFOLDING);
+        blockTypes.add(WoodenBlockType.SOUL_TORCH);
+        blockTypes.add(WoodenBlockType.TORCH);
+        blockTypes.add(WoodenBlockType.WALL_TORCH);
+        blockTypes.add(WoodenBlockType.WALL_SOUL_TORCH);
 
-        Stream
-            .of(WoodenObjectTypes.TORCH,
-                WoodenObjectTypes.BED,
-                WoodenObjectTypes.LOG_PILE,
-                WoodenObjectTypes.SOUL_TORCH)
-            .forEach(woodenObjectType -> properties.put(woodenObjectType, new Properties(400)));
-
-        Stream
-            .of(WoodenObjectTypes.SLAB)
-            .forEach(woodenObjectType -> properties.put(woodenObjectType, new Properties(150)));
-
-        this.properties = Collections.unmodifiableMap(properties);
+        return Collections.unmodifiableSet(blockTypes);
     }
 
     @Override
@@ -78,17 +68,37 @@ public final class WoodType implements IWoodType {
     }
 
     @Override
-    public Set<WoodenObjectType> getObjectTypes() {
-        return OBJECT_TYPES;
+    public Properties getProperties(final WoodenBlockType woodenBlockType) {
+        return DefaultWoodType.DEFAULT_BLOCK_PROPERTIES.get(woodenBlockType);
     }
 
     @Override
-    public Set<WoodenTieredObjectType> getTieredObjectTypes() {
-        return TIERED_OBJECT_TYPES;
+    public Properties getProperties(final WoodenItemType woodenItemType) {
+        return DefaultWoodType.DEFAULT_ITEM_PROPERTIES.get(woodenItemType);
     }
 
     @Override
-    public Properties getProperties(final WoodenObjectType woodenObjectType) {
-        return this.properties.get(woodenObjectType);
+    public Set<WoodenBlockType> getBlockTypes() {
+        return BLOCK_TYPES;
+    }
+
+    @Override
+    public Set<WoodenItemType> getItemTypes() {
+        return DefaultWoodType.DEFAULT_ITEM_TYPES;
+    }
+
+    @Override
+    public Set<WoodenTieredItemType> getTieredItemTypes() {
+        return DefaultWoodType.DEFAULT_TIERED_ITEM_TYPES;
+    }
+
+    @Override
+    public Set<WoodenBlockType> getBuiltinBlockTypes() {
+        return DefaultWoodType.DEFAULT_BUILTIN_BLOCK_TYPES;
+    }
+
+    @Override
+    public Set<WoodenItemType> getBuiltinItemTypes() {
+        return DefaultWoodType.DEFAULT_BUILTIN_ITEM_TYPES;
     }
 }

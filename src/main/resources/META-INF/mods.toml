@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/Yamahari/ILikeWood-ImmersiveEngineering-Pl
 
 [[mods]] #mandatory
 modId = "ilikewoodximmersiveengineering" #mandatory
-version = "1.16.5-6.2.3.0" #mandatory
+version = "1.16.5-6.3.0.0" #mandatory
 displayName = "I Like Wood - Immersive Engineering Plugin" #mandatory
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/i-like-wood-immersive-engineering-plugin" #optional
 logoFile = "logo.png" #optional
@@ -32,7 +32,7 @@ side = "BOTH"
 [[dependencies.ilikewoodximmersiveengineering]]
 modId = "ilikewood"
 mandatory = true
-versionRange = "[1.16.5-6.2.3.0,)"
+versionRange = "[1.16.5-6.3.0.0,)"
 ordering = "NONE"
 side = "BOTH"
 

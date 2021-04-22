@@ -12,7 +12,7 @@ public final class ImmersiveEngineeringWoodTypes {
     private ImmersiveEngineeringWoodTypes() {
     }
 
-    public static Stream<IWoodType> get() {
+    public static Stream<IWoodType> getAll() {
         return Stream.of(ImmersiveEngineeringWoodTypes.TREATED_WOOD);
     }
 }

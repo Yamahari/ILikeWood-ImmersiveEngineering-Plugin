@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ilikewood:stone_treated_wood_axe",
+    "ilikewood:iron_treated_wood_axe",
+    "ilikewood:golden_treated_wood_axe",
+    "ilikewood:diamond_treated_wood_axe",
+    "ilikewood:netherite_treated_wood_axe"
+  ]
+}
