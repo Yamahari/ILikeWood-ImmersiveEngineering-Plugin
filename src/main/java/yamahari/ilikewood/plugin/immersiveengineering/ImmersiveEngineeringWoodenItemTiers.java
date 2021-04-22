@@ -9,8 +9,8 @@ import yamahari.ilikewood.registry.woodenitemtier.IWoodenItemTier;
 public final class ImmersiveEngineeringWoodenItemTiers {
     public static final IWoodenItemTier TREATED_WOOD =
         new DefaultWoodenItemTier(ImmersiveEngineeringWoodTypes.TREATED_WOOD,
-            Constants.MOD_ID,
-            "treated_wood",
+            Constants.IE_MOD_ID,
+            Constants.TREATED_WOOD,
             () -> Ingredient.fromItems(ImmersiveEngineeringPlugin.BLOCK_REGISTRY.getObject(ImmersiveEngineeringWoodTypes.TREATED_WOOD,
                 WoodenBlockType.PANELS)));
 

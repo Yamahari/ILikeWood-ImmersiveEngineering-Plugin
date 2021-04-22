@@ -1,10 +1,4 @@
 {
   "replace": false,
-  "values": [
-    "ilikewood:golden_treated_wood_axe",
-    "ilikewood:golden_treated_wood_hoe",
-    "ilikewood:golden_treated_wood_pickaxe",
-    "ilikewood:golden_treated_wood_shovel",
-    "ilikewood:golden_treated_wood_sword"
-  ]
+  "values": []
 }

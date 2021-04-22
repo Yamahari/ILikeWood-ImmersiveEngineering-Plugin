@@ -16,7 +16,6 @@ public final class WoodType implements IWoodType {
 
     public WoodType(final String name) {
         this.name = name;
-
     }
 
     private static Set<WoodenBlockType> createBlockTypesSet() {
@@ -100,5 +99,24 @@ public final class WoodType implements IWoodType {
     @Override
     public Set<WoodenItemType> getBuiltinItemTypes() {
         return DefaultWoodType.DEFAULT_BUILTIN_ITEM_TYPES;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final WoodType woodType = (WoodType) o;
+
+        return name.equals(woodType.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

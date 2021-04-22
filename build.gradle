@@ -41,7 +41,7 @@ sourceSets {
 processResources {
     copy {
         from 'src/data/resources/assets/ilikewood/lang'
-        into 'src/main/resources/assets/ilikewoodximmersiveengineering/lang'
+        into 'src/data/resources/assets/ilikewoodximmersiveengineering/lang'
     }
     delete 'src/data/resources/assets/ilikewood/lang'
 }
