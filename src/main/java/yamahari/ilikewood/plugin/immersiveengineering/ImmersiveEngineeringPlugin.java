@@ -1,6 +1,6 @@
 package yamahari.ilikewood.plugin.immersiveengineering;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import yamahari.ilikewood.ILikeWoodPlugin;
 import yamahari.ilikewood.IModPlugin;
 import yamahari.ilikewood.plugin.immersiveengineering.util.Constants;
@@ -17,6 +17,11 @@ public final class ImmersiveEngineeringPlugin implements IModPlugin {
     @Override
     public String getModId() {
         return Constants.IE_MOD_ID;
+    }
+
+    @Override
+    public String getPluginModId() {
+        return Constants.MOD_ID;
     }
 
     @Override

@@ -1,59 +1,63 @@
 package yamahari.ilikewood.plugin.immersiveengineering.util;
 
 import yamahari.ilikewood.registry.objecttype.WoodenBlockType;
+import yamahari.ilikewood.registry.objecttype.WoodenEntityType;
 import yamahari.ilikewood.registry.objecttype.WoodenItemType;
 import yamahari.ilikewood.registry.objecttype.WoodenTieredItemType;
 import yamahari.ilikewood.registry.woodtype.DefaultWoodType;
 import yamahari.ilikewood.registry.woodtype.IWoodType;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public final class WoodType implements IWoodType {
     private static final Set<WoodenBlockType> BLOCK_TYPES = createBlockTypesSet();
-    private final String name;
 
-    public WoodType(final String name) {
+    private static final Set<WoodenEntityType> ENTITY_TYPES = createEntityTypesSet();
+    private final String name;
+    private final IWoodType.Colors colors;
+
+    public WoodType(final String name, final IWoodType.Colors colors) {
         this.name = name;
+        this.colors = colors;
     }
 
     private static Set<WoodenBlockType> createBlockTypesSet() {
-        final Set<WoodenBlockType> blockTypes = new HashSet<>();
+        return Set.of(WoodenBlockType.PANELS,
+            WoodenBlockType.PANELS_STAIRS,
+            WoodenBlockType.PANELS_SLAB,
+            WoodenBlockType.BARREL,
+            WoodenBlockType.WHITE_BED,
+            WoodenBlockType.ORANGE_BED,
+            WoodenBlockType.MAGENTA_BED,
+            WoodenBlockType.LIGHT_BLUE_BED,
+            WoodenBlockType.YELLOW_BED,
+            WoodenBlockType.LIME_BED,
+            WoodenBlockType.PINK_BED,
+            WoodenBlockType.GRAY_BED,
+            WoodenBlockType.LIGHT_GRAY_BED,
+            WoodenBlockType.CYAN_BED,
+            WoodenBlockType.PURPLE_BED,
+            WoodenBlockType.BLUE_BED,
+            WoodenBlockType.BROWN_BED,
+            WoodenBlockType.GREEN_BED,
+            WoodenBlockType.RED_BED,
+            WoodenBlockType.BLACK_BED,
+            WoodenBlockType.BOOKSHELF,
+            WoodenBlockType.COMPOSTER,
+            WoodenBlockType.CRAFTING_TABLE,
+            WoodenBlockType.CHEST,
+            WoodenBlockType.LECTERN,
+            WoodenBlockType.LADDER,
+            WoodenBlockType.SCAFFOLDING,
+            WoodenBlockType.SOUL_TORCH,
+            WoodenBlockType.TORCH,
+            WoodenBlockType.WALL_TORCH,
+            WoodenBlockType.WALL_SOUL_TORCH,
+            WoodenBlockType.CRATE);
+    }
 
-        blockTypes.add(WoodenBlockType.PANELS);
-        blockTypes.add(WoodenBlockType.PANELS_STAIRS);
-        blockTypes.add(WoodenBlockType.PANELS_SLAB);
-        blockTypes.add(WoodenBlockType.BARREL);
-        blockTypes.add(WoodenBlockType.WHITE_BED);
-        blockTypes.add(WoodenBlockType.ORANGE_BED);
-        blockTypes.add(WoodenBlockType.MAGENTA_BED);
-        blockTypes.add(WoodenBlockType.LIGHT_BLUE_BED);
-        blockTypes.add(WoodenBlockType.YELLOW_BED);
-        blockTypes.add(WoodenBlockType.LIME_BED);
-        blockTypes.add(WoodenBlockType.PINK_BED);
-        blockTypes.add(WoodenBlockType.GRAY_BED);
-        blockTypes.add(WoodenBlockType.LIGHT_GRAY_BED);
-        blockTypes.add(WoodenBlockType.CYAN_BED);
-        blockTypes.add(WoodenBlockType.PURPLE_BED);
-        blockTypes.add(WoodenBlockType.BLUE_BED);
-        blockTypes.add(WoodenBlockType.BROWN_BED);
-        blockTypes.add(WoodenBlockType.GREEN_BED);
-        blockTypes.add(WoodenBlockType.RED_BED);
-        blockTypes.add(WoodenBlockType.BLACK_BED);
-        blockTypes.add(WoodenBlockType.BOOKSHELF);
-        blockTypes.add(WoodenBlockType.COMPOSTER);
-        blockTypes.add(WoodenBlockType.CRAFTING_TABLE);
-        blockTypes.add(WoodenBlockType.CHEST);
-        blockTypes.add(WoodenBlockType.LECTERN);
-        blockTypes.add(WoodenBlockType.LADDER);
-        blockTypes.add(WoodenBlockType.SCAFFOLDING);
-        blockTypes.add(WoodenBlockType.SOUL_TORCH);
-        blockTypes.add(WoodenBlockType.TORCH);
-        blockTypes.add(WoodenBlockType.WALL_TORCH);
-        blockTypes.add(WoodenBlockType.WALL_SOUL_TORCH);
-
-        return Collections.unmodifiableSet(blockTypes);
+    private static Set<WoodenEntityType> createEntityTypesSet() {
+        return Set.of(WoodenEntityType.PAINTING, WoodenEntityType.ITEM_FRAME);
     }
 
     @Override
@@ -89,6 +93,16 @@ public final class WoodType implements IWoodType {
     @Override
     public Set<WoodenTieredItemType> getTieredItemTypes() {
         return DefaultWoodType.DEFAULT_TIERED_ITEM_TYPES;
+    }
+
+    @Override
+    public Set<WoodenEntityType> getEntityTypes() {
+        return ENTITY_TYPES;
+    }
+
+    @Override
+    public Colors getColors() {
+        return this.colors;
     }
 
     @Override

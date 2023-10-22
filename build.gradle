@@ -1,29 +1,27 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0, 6.2)'
 }
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
-version = '1.16.5-6.3.0.0'
-group = 'yamahari.ilikewoodximmersiveengineering' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'ilikewoodximmersiveengineering'
+version = "${version_mc}-${version_major}.${version_minor}.${version_patch}"
+group = "yamahari.${mod_id}"
+archivesBaseName = "${mod_id}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 repositories {
     flatDir {
         dir 'build/libs'
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
     }
 }
 
@@ -33,9 +31,24 @@ sourceSets {
             srcDirs = ['src/main/java']
         }
         resources {
-            srcDirs = ['src/main/resources', 'src/data/resources']
+            srcDirs = ['src/main/resources', 'src/data/resources/data', 'src/data/resources/textures']
         }
     }
+}
+
+def replaceVersions = tasks.register('replaceVersions', Copy) {
+    it.outputs.upToDateWhen { false }
+    it.from(sourceSets.main.resources) {
+        include 'META-INF/mods.toml'
+        expand 'mod_id': mod_id,
+                'version': version,
+                'version_range_mc': version_range_mc,
+                'version_range_loader': version_range_loader,
+                'version_range_forge': version_range_forge,
+                'version_range_ilw': version_range_ilw,
+                'version_range_ie': version_range_ie
+    }
+    it.into "$buildDir/resources/main/"
 }
 
 processResources {
@@ -44,34 +57,37 @@ processResources {
         into 'src/data/resources/assets/ilikewoodximmersiveengineering/lang'
     }
     delete 'src/data/resources/assets/ilikewood/lang'
+    exclude 'META-INF/mods.toml'
+    configure {
+        finalizedBy replaceVersions
+    }
 }
 
-configurations {
-    ilikewood
-    runtimeOnly.extendsFrom(ilikewood)
+classes.configure {
+    dependsOn(replaceVersions)
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
+    minecraft "net.minecraftforge:forge:${version_mc}-${version_forge}"
 
-    compileOnly fg.deobf('build.libs:ilikewood:1.16.5-6.3.0.0:api')
+    compileOnly fg.deobf("build.libs:ilikewood:${version_mc}-${version_ilw}:api")
+    runtimeOnly fg.deobf("build.libs:ilikewood:${version_mc}-${version_ilw}")
 
-    ilikewood fg.deobf('build.libs:ilikewood:1.16.5-6.3.0.0')
-    runtimeOnly fg.deobf('build.libs:ImmersiveEngineering:1.16.5-4.2.4-134')
+    runtimeOnly fg.deobf("mezz.jei:jei-${version_mc}-forge:${version_jei}")
+
+    runtimeOnly fg.deobf("build.libs:ImmersiveEngineering:${version_mc}-${version_ie}")
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    mappings channel: 'official', version: "${version_mc}"
 
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 ilikewoodximmersiveengineering {
@@ -84,7 +100,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 ilikewoodximmersiveengineering {
@@ -98,12 +115,15 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             property 'ilikewood.datagen.modid', 'immersiveengineering'
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
             args '--mod', 'ilikewood',
                     '--all',
-                    '--output', file('src/data/resources/'),
+                    '--output', file('src/data/resources/ilikewood_resources'),
                     '--existing', file('src/main/resources/'),
-                    '--existing', configurations.ilikewood.asPath
+                    '--existing-mod', 'ilikewood',
+                    '--existing-mod', 'immersiveengineering'
 
             mods {
                 ilikewoodximmersiveengineering {
@@ -117,35 +137,17 @@ minecraft {
 jar {
     sourceSets.main.resources {
         exclude 'assets/immersiveengineering/**'
+        exclude '.cache'
     }
     manifest {
-        attributes([
-                "Specification-Title": "ilikewoodximmersiveengineering",
-                "Specification-Vendor": "yamahari",
-                "Specification-Version": "${version}",
-                "Implementation-Title": "ilikewoodximmersiveengineering",
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"yamahari",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+        attributes(["Specification-Title"     : "${mod_id}",
+                    "Specification-Vendor"    : "yamahari",
+                    "Specification-Version"   : "${version}",
+                    "Implementation-Title"    : "${mod_id}",
+                    "Implementation-Version"  : "${version}",
+                    "Implementation-Vendor"   : "yamahari",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
     }
-}
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
+    finalizedBy 'reobfJar'
 }

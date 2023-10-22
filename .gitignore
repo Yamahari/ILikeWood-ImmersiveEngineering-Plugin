@@ -28,3 +28,7 @@ forge*changelog.txt
 /src/main/resources/assets/biomesoplenty/
 /src/main/resources/.cache/
 /src/main/resources/assets/immersiveengineering/
+/src/data/resources/.cache/
+/src/data/resources/assets/
+/src/data/resources/data/
+/src/data/resources/
