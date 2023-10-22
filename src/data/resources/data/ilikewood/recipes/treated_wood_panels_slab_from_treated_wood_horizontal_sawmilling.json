@@ -1,8 +1,0 @@
-{
-  "type": "ilikewood:sawmilling",
-  "ingredient": {
-    "item": "immersiveengineering:treated_wood_horizontal"
-  },
-  "result": "ilikewood:treated_wood_panels_slab",
-  "count": 2
-}

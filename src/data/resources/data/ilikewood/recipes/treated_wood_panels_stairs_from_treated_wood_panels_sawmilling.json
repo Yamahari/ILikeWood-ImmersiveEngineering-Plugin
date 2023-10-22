@@ -1,8 +1,0 @@
-{
-  "type": "ilikewood:sawmilling",
-  "ingredient": {
-    "item": "ilikewood:treated_wood_panels"
-  },
-  "result": "ilikewood:treated_wood_panels_stairs",
-  "count": 1
-}
